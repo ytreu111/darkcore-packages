@@ -13,7 +13,7 @@ PKG_BUILD_DEPENDS:=rust/host
 PKG_BUILD_PARALLEL:=1
 
 include $(INCLUDE_DIR)/package.mk
-include $(TOPDIR)/package/feeds/packages/rust/rust-package.mk
+include ../../packages/lang/rust/rust-package.mk
 
 define Package/geoupdate
 	SECTION:=utils
