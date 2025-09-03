@@ -17,6 +17,12 @@ jobs:
       - name: Checkout source
         uses: actions/checkout@v4
 
+      - name: Build env on ubuntu
+        run: |
+          wget https://raw.githubusercontent.com/friendlyarm/build-env-on-ubuntu-bionic/master/install.sh
+          chmod 755 install.sh
+          ./install.sh
+
       - name: Download OpenWrt SDK
         run: |
           wget https://downloads.openwrt.org/releases/24.10.2/targets/rockchip/armv8/openwrt-sdk-24.10.2-rockchip-armv8_gcc-13.3.0_musl.Linux-x86_64.tar.zst
@@ -28,10 +34,13 @@ jobs:
         run: |
           cp -r ${{ matrix.pkg }} openwrt-sdk/package/${{ matrix.pkg }}
 
-      - name: Build ${{ matrix.pkg }}
+      - name: Install feeds
         run: |
           cd openwrt-sdk
           ./scripts/feeds update -a
           ./scripts/feeds install -a
           make defconfig
+
+      - name: Build ${{ matrix.pkg }}
+        run: |
           make package/${{ matrix.pkg }}/compile V=sc
