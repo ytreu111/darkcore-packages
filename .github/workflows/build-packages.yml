@@ -43,4 +43,5 @@ jobs:
 
       - name: Build ${{ matrix.pkg }}
         run: |
+          cd openwrt-sdk
           make package/${{ matrix.pkg }}/compile V=sc
