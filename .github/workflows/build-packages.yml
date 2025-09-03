@@ -45,3 +45,9 @@ jobs:
         run: |
           cd openwrt-sdk
           make package/${{ matrix.pkg }}/compile V=sc
+
+      - name: Upload IPK
+        uses: actions/upload-artifact@v3
+        with:
+          name: ${{ matrix.pkg }}-ipk
+          path: openwrt-sdk/bin/packages/*/base/*.ipk
