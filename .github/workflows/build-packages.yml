@@ -1,0 +1,28 @@
+name: Build DarkCore Packages
+
+on:
+  workflow_dispatch:
+
+#env:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        pkg: [geoupdate]
+      fail-fast: false
+
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+
+      - name: Download OpenWrt SDK
+        run: |
+          wget https://downloads.openwrt.org/releases/24.10.2/targets/rockchip/armv8/openwrt-sdk-24.10.2-rockchip-armv8_gcc-13.3.0_musl.Linux-x86_64.tar.zst
+          tar xf openwrt-sdk-*.tar.xz
+          mv openwrt-sdk-* openwrt-sdk
+
+      - name: Copy ${{ matrix.pkg }}
+        run: |
+          cp -r ${{ matrix.pkg }} openwrt-sdk/package/${{ matrix.pkg }}
