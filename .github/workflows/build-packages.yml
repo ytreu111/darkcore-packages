@@ -3,7 +3,8 @@ name: Build DarkCore Packages
 on:
   workflow_dispatch:
 
-#env:
+env:
+  ARTIFACT_DIR: "artifacts"
 
 jobs:
   build:
@@ -46,11 +47,16 @@ jobs:
           cd openwrt-sdk
           make package/${{ matrix.pkg }}/compile V=sc
 
+      - name: Process IPK
+        run: |
+          mkdir -p "${{ env.ARTIFACT_DIR }}"
+          cp -p openwrt-sdk/bin/packages/*/${{ matrix.pkg }}*.ipk
+
       - name: Upload IPK
         uses: actions/upload-artifact@v4
         with:
           name: ${{ matrix.pkg }}-ipk
-          path: openwrt-sdk/bin/packages/*/base/*.ipk
+          path: ${{ env.ARTIFACT_DIR }}/*
 
   release:
     name: Create Release
@@ -59,15 +65,15 @@ jobs:
     steps:
       - name: Prepare workspace
         run: |
-          mkdir -p artifacts
+          mkdir -p ${{ env.ARTIFACT_DIR }}
 
       - name: Download artifacts
         uses: actions/download-artifact@v4
         with:
-          path: artifacts
+          path: ${{ env.ARTIFACT_DIR }}
           merge-multiple: true
 
       - name: Test
-        run : |
-          cd artifacts
+        run: |
+          cd ${{ env.ARTIFACT_DIR }}
           ls -la
