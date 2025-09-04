@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        pkg: [ geoupdate ]
+        pkg: [ geoupdate, geoupdate-go ]
       fail-fast: false
 
     steps:
@@ -50,7 +50,7 @@ jobs:
       - name: Process IPK
         run: |
           mkdir -p "${{ env.ARTIFACT_DIR }}"
-          cp -p openwrt-sdk/bin/packages/*/${{ matrix.pkg }}*.ipk "${{ env.ARTIFACT_DIR }}"
+          cp -p openwrt-sdk/bin/packages/**/${{ matrix.pkg }}*.ipk "${{ env.ARTIFACT_DIR }}"
 
       - name: Upload IPK
         uses: actions/upload-artifact@v4
@@ -73,7 +73,48 @@ jobs:
           path: ${{ env.ARTIFACT_DIR }}
           merge-multiple: true
 
-      - name: Test
+      - name: Setup opkg-utils from Yocto
+        run: git clone --depth 1 git://git.yoctoproject.org/opkg-utils || echo "Clone failed"
+
+      - name: Setup Usign
         run: |
-          cd ${{ env.ARTIFACT_DIR }}
-          ls -la
+          git clone https://git.openwrt.org/project/usign.git
+          cd usign
+          mkdir build
+          cd build
+          cmake ..
+          make
+          make install
+
+      - name: Restore usign private key
+        env:
+          USIGN_SECRET_KEY_B64: ${{ secrets.USIGN_SECRET_KEY_B64 }}
+        shell: bash
+        run: |
+          echo "$USIGN_SECRET_KEY_B64" | base64 -d > key-build.sec
+          chmod 600 key-build.sec
+
+      - name: Prepare Repo
+        run: |
+          ls -la ${{ env.ARTIFACT_DIR }}
+          
+          mkdir feed
+          cp -p ${{ env.ARTIFACT_DIR }}/*.ipk feed
+          ls -la feed
+
+      - name: Generate Packages
+        run: |
+          n=0
+          until opkg-utils/opkg-make-index -a -f -v --checksum sha256 feed > feed/Packages || [ $n -ge 3 ]; do
+          echo "Indexing failed, retrying... ($((++n)))"
+          sleep 2
+          done
+          
+          gzip -kf feed/Packages > feed/Packages.gz
+          
+          file feed/Packages
+          file key-build.sec
+          
+          usign -S -m feed/Packages -s key-build.sec -x feed/Packages.sig
+          
+          ls -l feed/
