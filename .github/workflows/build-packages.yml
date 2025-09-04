@@ -68,6 +68,7 @@ jobs:
       - name: Prepare workspace
         run: |
           mkdir -p ${{ env.ARTIFACT_DIR }}
+          echo "BUILD_DATE=$(date -u +'%Y-%m-%d %H:%M:%S UTC')" >> $GITHUB_ENV
 
       - name: Download artifacts
         uses: actions/download-artifact@v4
@@ -106,8 +107,6 @@ jobs:
         run: |
           rm -rf feed/*.ipk feed/Packages*
           cp -p ${{ env.ARTIFACT_DIR }}/*.ipk feed
-          
-          echo "BUILD_DATE=$(date -u +'%Y-%m-%d %H:%M:%S UTC')" >> $GITHUB_ENV
           
           n=0
           until opkg-utils/opkg-make-index -a -f -v --checksum sha256 feed > feed/Packages || [ $n -ge 3 ]; do
