@@ -1,0 +1,319 @@
+body {
+    font-family: Arial, sans-serif;
+    padding: 2rem;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+.container {
+    margin: auto;
+    background: #fff;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.container:hover {
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+}
+
+#toggle-theme {
+    float: right;
+    font-size: 1.2rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #0066cc;
+}
+
+.tab-buttons {
+    height: 2.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.tab-buttons .divider {
+    height: 2rem;
+    width: 2px;
+    background-color: #000000;
+}
+
+button {
+    font-size: 1rem;
+    border-top: none;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+button.active {
+    font-size: 1.5rem;
+    color: #333;
+    background-color: #d6ebff;
+    font-weight: bold;
+    cursor: default;
+}
+
+button.active:hover {
+    background-color: none;
+}
+
+button.inactive {
+    color: #0066cc;
+    opacity: 0.8;
+    font-size: 1rem;
+}
+
+button.inactive:hover {
+    opacity: 1;
+    background-color: #7aade0;
+}
+
+#security-statement {
+    font-size: large;
+}
+
+h1 {
+    color: #0066cc;
+}
+
+hr {
+    border: 1px solid #ccc;
+}
+
+main {
+    margin: 2rem 0;
+}
+
+.notice {
+    background: #eef8ff;
+    border-left: 4px solid #91d1ff;
+    padding: 1rem;
+    margin: 1rem 0;
+    border-radius: 10px;
+}
+.notice ul li {
+    margin: 0.5rem 0;
+}
+
+section.part {
+    margin: 0 1.5rem;
+}
+
+.code-block {
+    background: #f7f7f7;
+    padding: 1rem;
+    border-radius: 10px;
+    margin: 1rem 0;
+}
+.method {
+    margin: 1.5rem 0;
+}
+
+.method ol li {
+    margin: 0.5rem 0;
+}
+.note {
+    color: #666;
+    font-style: italic;
+}
+
+.tips {
+    background: #e8fff5;
+    border-left: 4px solid #42b983;
+    padding: 1rem;
+    border-radius: 10px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid #ccc;
+    margin: 1rem 0;
+    background: white;
+}
+
+th,
+td {
+    padding: 0.75rem;
+    text-align: left;
+    border-bottom: 1px solid #ccc;
+}
+
+th {
+    background-color: #eeeeee;
+}
+
+tr:hover {
+    background-color: #d1f1f7;
+}
+
+span {
+    font-size: 1rem;
+    display: inline-block;
+    margin-right: 1rem;
+}
+
+code {
+    background: #e7e7e7;
+    padding: 0.2rem 0.5rem;
+    border-radius: 3px;
+    font-family: monospace;
+    font-size: 1rem;
+}
+
+pre {
+    overflow-x: auto;
+    background: #eaeaea;
+    padding: 1em;
+    border-radius: 6px;
+    font-family: monospace;
+    font-size: 1rem;
+    scrollbar-color: #bbb #eee;
+    scrollbar-width: thin;
+    padding: 1rem;
+}
+
+pre::-webkit-scrollbar {
+    height: 8px;
+}
+
+pre::-webkit-scrollbar-track {
+    background: #eee;
+    border-radius: 4px;
+}
+
+pre::-webkit-scrollbar-thumb {
+    background-color: #bbb;
+    border-radius: 4px;
+    border: 2px solid #eee;
+}
+
+pre::-webkit-scrollbar-thumb:hover {
+    background-color: #888;
+}
+
+.pre-wrapper {
+  position: relative;
+}
+
+.copy-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  padding: 4px 8px;
+  font-size: 0.8rem;
+  border-radius: 4px;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  opacity: 1;
+}
+
+.copy-btn.copied {
+  background-color: #10b981;
+  color: white;
+  border-color: #10b981;
+}
+
+a {
+    color: #0066cc;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.footer {
+    margin-top: 2rem;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+/* dark theme */
+body.dark {
+    background-color: #1e1e1e;
+    color: #ccc;
+}
+
+body.dark .container {
+    background-color: #2a2a2a;
+    box-shadow: 0 2px 10px rgba(255, 255, 255, 0.1);
+}
+
+body.dark table {
+    background: #333;
+    color: #ccc;
+    border-color: #555;
+}
+
+body.dark th {
+    background-color: #444;
+}
+
+body.dark tr:hover {
+    background-color: #444;
+}
+
+body.dark a {
+    color: #9ecbff;
+}
+
+body.dark .divider {
+    background-color: #999;
+}
+
+body.dark pre {
+    background: #3a3a3a;
+    color: #9ecbff;
+    scrollbar-color: #666 #444;
+}
+
+body.dark code {
+    background: #3a3a3a;
+    color: #9ecbff;
+}
+
+body.dark button.active {
+    background-color: #3a3a3a;
+    color: #ccc;
+}
+
+body.dark button.inactive {
+    background-color: #444;
+    color: #9ecbff;
+    opacity: 0.8;
+}
+
+body.dark button.inactive:hover {
+    opacity: 1;
+    background-color: #555;
+}
+
+body.dark button {
+    color: #9ecbff;
+}
+
+body.dark .notice {
+    border-left: 4px solid #91d1ff;
+    padding: 1rem;
+    margin: 1rem 0;
+    border-radius: 10px;
+    background: #303030;
+    color: #ccc;
+}
+body.dark .code-block {
+    background: #2f2f2f;
+    color: #9ecbff;
+}
+body.dark .tips {
+    border-left: 4px solid #42b983;
+    background: #303030;
+    color: #ccc;
+    padding: 1rem;
+    border-radius: 10px;
+}
