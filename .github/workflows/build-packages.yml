@@ -5,6 +5,7 @@ on:
 
 env:
   ARTIFACT_DIR: "artifacts"
+  BUILD_DATE: ""
 
 jobs:
   build:
@@ -77,6 +78,12 @@ jobs:
       - name: Setup opkg-utils from Yocto
         run: git clone --depth 1 git://git.yoctoproject.org/opkg-utils || echo "Clone failed"
 
+      - name: Checkout feed branch
+        uses: actions/checkout@v4
+        with:
+          ref: feed
+          path: feed
+
       - name: Setup Usign
         run: |
           git clone https://git.openwrt.org/project/usign.git
@@ -92,21 +99,16 @@ jobs:
           USIGN_SECRET_KEY_B64: ${{ secrets.USIGN_SECRET_KEY_B64 }}
         shell: bash
         run: |
-          echo "$USIGN_SECRET_KEY_B64"
-          echo "$USIGN_SECRET_KEY_B64" | base64
           echo "$USIGN_SECRET_KEY_B64" | base64 -d > key-build.sec
           chmod 600 key-build.sec
 
-      - name: Prepare Repo
+      - name: Prepare feed files
         run: |
-          ls -la ${{ env.ARTIFACT_DIR }}
-          
-          mkdir feed
+          rm -rf feed/*.ipk feed/Packages*
           cp -p ${{ env.ARTIFACT_DIR }}/*.ipk feed
-          ls -la feed
-
-      - name: Generate Packages
-        run: |
+          
+          echo "BUILD_DATE=$(date -u +'%Y-%m-%d %H:%M:%S UTC')" >> $GITHUB_ENV
+          
           n=0
           until opkg-utils/opkg-make-index -a -f -v --checksum sha256 feed > feed/Packages || [ $n -ge 3 ]; do
           echo "Indexing failed, retrying... ($((++n)))"
@@ -121,3 +123,13 @@ jobs:
           usign -S -m feed/Packages -s key-build.sec -x feed/Packages.sig
           
           ls -l feed/
+
+      - name: Commit and push to feed branch
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add -A
+          git diff --cached --quiet && echo "No changes" && exit 0
+          git commit -m "Update feed: ${{ env.BUILD_DATE }}"
+          git push origin HEAD:feed
+        working-directory: feed
