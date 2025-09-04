@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        pkg: [ geoupdate, geoupdate-go ]
+        pkg: [ geoupdate ]
       fail-fast: false
 
     steps:
@@ -50,7 +50,8 @@ jobs:
       - name: Process IPK
         run: |
           mkdir -p "${{ env.ARTIFACT_DIR }}"
-          cp -p openwrt-sdk/bin/packages/**/${{ matrix.pkg }}*.ipk "${{ env.ARTIFACT_DIR }}"
+          ls -laR openwrt-sdk/bin/packages
+          cp -p openwrt-sdk/bin/packages/aarch64_generic/base/${{ matrix.pkg }}*.ipk "${{ env.ARTIFACT_DIR }}"
 
       - name: Upload IPK
         uses: actions/upload-artifact@v4
