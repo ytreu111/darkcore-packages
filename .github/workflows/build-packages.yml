@@ -50,7 +50,7 @@ jobs:
       - name: Process IPK
         run: |
           mkdir -p "${{ env.ARTIFACT_DIR }}"
-          cp -p openwrt-sdk/bin/packages/*/${{ matrix.pkg }}*.ipk
+          cp -p openwrt-sdk/bin/packages/*/${{ matrix.pkg }}*.ipk "${{ env.ARTIFACT_DIR }}"
 
       - name: Upload IPK
         uses: actions/upload-artifact@v4
