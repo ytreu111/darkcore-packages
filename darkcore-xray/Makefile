@@ -27,10 +27,10 @@ include $(INCLUDE_DIR)/package.mk
 include ../../lang/golang/golang-package.mk
 
 define Package/darkcore-xray
-	TITLE:=A proxy platform to bypass network restrictions
-	SECTION:=net
-	CATEGORY:=DarkCore
-	URL:=https://xtls.github.io
+  TITLE:=A platform for building proxies to bypass network restrictions
+  SECTION:=net
+  CATEGORY:=DarkCore
+  URL:=https://xtls.github.io
 	DEPENDS:=$(GO_ARCH_DEPENDS) +ca-bundle
 endef
 
