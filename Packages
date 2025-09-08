@@ -1,3 +1,37 @@
+Package: darkcore-rules
+Version: 1.0.0-r1
+Depends: libc
+Section: net
+Architecture: aarch64_generic
+SHA256sum: 3c5eb53fccecb99aebad289b9deadb50332dd5ba82e431836b913eaa9815dd7f
+Size: 1520
+Filename: darkcore-rules_1.0.0-r1_aarch64_generic.ipk
+Source: feeds/base/darkcore-rules
+Description: Darkcore Rules
+SourceName: darkcore-rules
+SourceDateEpoch: 1750711236
+Installed-Size: 10240
+
+
+Package: darkcore-xray
+Version: 25.1.30-r1
+Depends: libc, ca-bundle
+Section: net
+Architecture: aarch64_generic
+Maintainer: Tianling Shen <cnsztl@immortalwrt.org>
+SHA256sum: 37a02568f01e2c79abd06e787552bbe6e887411060c0cf4090c1800d8b1f0b6b
+Size: 9838427
+Filename: darkcore-xray_25.1.30-r1_aarch64_generic.ipk
+Source: feeds/base/darkcore-xray
+Description: Xray, Penetrates Everything. It helps you to build your own computer network.
+License: MPL-2.0
+SourceName: darkcore-xray
+LicenseFiles: LICENSE
+SourceDateEpoch: 1750711236
+URL: https://xtls.github.io
+Installed-Size: 27627520
+
+
 Package: geoupdate
 Version: 0.0.5-r1
 Depends: libc
