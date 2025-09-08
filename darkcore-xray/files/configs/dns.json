@@ -1,0 +1,14 @@
+{
+  "dns": {
+    "hosts": {
+      "domain:googleapis.cn": "googleapis.com",
+      "dns.google": "8.8.8.8"
+    },
+    "servers": [
+      "223.5.5.5",
+      "https://1.1.1.1/dns-query",
+      "https://dns.google/dns-query",
+      "localhost"
+    ]
+  }
+}

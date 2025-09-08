@@ -1,0 +1,30 @@
+{
+  "routing": {
+    "domainMatcher": "mph",
+    "domainStrategy": "IPIfNonMatch",
+    "rules": [
+      {
+        "type": "field",
+        "domain": ["geosite:category-ads-all"],
+        "outboundTag": "block"
+      },
+      {
+        "type": "field",
+        "inboundTag": ["all-in"],
+        "port": 53,
+        "network": "udp",
+        "outboundTag": "dns-out"
+      },
+      {
+        "type": "field",
+        "ip": ["1.1.1.1", "8.8.8.8"],
+        "outboundTag": "proxy"
+      },
+      {
+        "type": "field",
+        "ip": ["195.66.213.74"],
+        "outboundTag": "direct"
+      }
+    ]
+  }
+}
