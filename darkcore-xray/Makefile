@@ -64,4 +64,4 @@ define Package/darkcore-xray/install
 	$(INSTALL_DATA) $(CURDIR)/files/configs/tail_outbounds.json $(1)/etc/xray/
 endef
 
-$(eval $(call BuildPackage,xray-core))
+$(eval $(call BuildPackage,darkcore-xray))
