@@ -12,12 +12,12 @@ define Package/darkcorerules
 	TITLE:=Darkcore proxy rules
 endef
 
-define Package/darkcorerules/install
-	$(INSTALL_DIR) $(1)/etc/darkcorerules/
-	$(INSTALL_BIN) $(CURDIR)/files/nftables.rulesv46 $(1)/etc/darkcorerules/
+define Build/Compile
+  true
+endef
 
-	$(INSTALL_DIR) $(1)/etc/init.d/
-	$(INSTALL_BIN) $(CURDIR)/files/darkcorerules $(1)/etc/init.d/darkcorerules
+define Package/darkcorerules/install
+	$(CP) ./files/* $(1)/
 endef
 
 $(eval $(call BuildPackage,$(PKG_NAME)))

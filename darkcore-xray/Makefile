@@ -1,12 +1,12 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=darkcore-xray
-PKG_VERSION:=25.9.5
+PKG_VERSION:=25.1.30
 PKG_RELEASE:=1
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=https://codeload.github.com/XTLS/Xray-core/tar.gz/v$(PKG_VERSION)?
-PKG_HASH:=5c215908982635cc507629e1d366f72a3bf42f1237bcab6687c7a1e8f757bc0d
+PKG_HASH:=983ee395f085ed1b7fbe0152cb56a5b605a6f70a5645d427c7186c476f14894e
 
 PKG_MAINTAINER:=Tianling Shen <cnsztl@immortalwrt.org>
 PKG_LICENSE:=MPL-2.0
@@ -24,7 +24,7 @@ GO_PKG_LDFLAGS_X:= \
 	$(GO_PKG)/core.version=$(PKG_VERSION)
 
 include $(INCLUDE_DIR)/package.mk
-include $(TOPDIR)/feeds/packages/lang/golang/golang-package.mk
+include ../../packages/lang/golang/golang-package.mk
 
 define Package/darkcore-xray
   TITLE:=A platform for building proxies to bypass network restrictions
