@@ -1,11 +1,11 @@
 Package: darkcore-rules
-Version: 1.0.0-r1
+Version: 1.0.1-r1
 Depends: libc
 Section: net
 Architecture: aarch64_generic
-SHA256sum: 3c5eb53fccecb99aebad289b9deadb50332dd5ba82e431836b913eaa9815dd7f
-Size: 1520
-Filename: darkcore-rules_1.0.0-r1_aarch64_generic.ipk
+SHA256sum: b310c9291c8e576fe0b6474e57a8556b04d8aacf7ea04df14a48c5b45e88efb9
+Size: 1515
+Filename: darkcore-rules_1.0.1-r1_aarch64_generic.ipk
 Source: feeds/base/darkcore-rules
 Description: Darkcore Rules
 SourceName: darkcore-rules
