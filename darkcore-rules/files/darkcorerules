@@ -21,7 +21,7 @@ start_service() {
     ip rule add fwmark 1 table 100
     ip route add local 0.0.0.0/0 dev lo table 100
     ip route add default via $GATEWAY
-    nft -f /root/nftables.rulesv46
+    nft -f /etc/darkcorerules/nftables.rulesv46
 }
 
 stop_service() {
