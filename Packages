@@ -37,8 +37,8 @@ Version: 0.0.5-r1
 Depends: libc
 Section: utils
 Architecture: aarch64_generic
-SHA256sum: 408a83d10a65f8b29211022435f72e5e1e6044df9d71a408ee2a013a81a83ca6
-Size: 2058384
+SHA256sum: 0d0ada274238d52f012b79f8ee2785411251c203e44793fb152d116525214e19
+Size: 2058338
 Filename: geoupdate_0.0.5-r1_aarch64_generic.ipk
 Source: feeds/base/geoupdate
 Description: Geosite and Geoip updater
