@@ -19,8 +19,8 @@ Depends: libc, ca-bundle
 Section: net
 Architecture: aarch64_generic
 Maintainer: Tianling Shen <cnsztl@immortalwrt.org>
-SHA256sum: 37a02568f01e2c79abd06e787552bbe6e887411060c0cf4090c1800d8b1f0b6b
-Size: 9838427
+SHA256sum: a316ebd302d83ed27e74619cfd9d638304bde38f6c4207bbd7722c089c02778b
+Size: 9840179
 Filename: darkcore-xray_25.1.30-r1_aarch64_generic.ipk
 Source: feeds/base/darkcore-xray
 Description: Xray, Penetrates Everything. It helps you to build your own computer network.
@@ -29,7 +29,7 @@ SourceName: darkcore-xray
 LicenseFiles: LICENSE
 SourceDateEpoch: 1750711236
 URL: https://xtls.github.io
-Installed-Size: 27627520
+Installed-Size: 27637760
 
 
 Package: geoupdate
