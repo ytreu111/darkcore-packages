@@ -4,17 +4,16 @@ PKG_NAME:=geoupdate
 PKG_VERSION:=0.0.5
 PKG_RELEASE:=1
 
-PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
-PKG_SOURCE_URL:=https://codeload.github.com/ytreu111/geoupdate/tar.gz/v$(PKG_VERSION)?
-PKG_HASH:=skip
+PKG_SOURCE_PROTO:=local
+PKG_SOURCE_VERSION:=$(PKG_VERSION)
 
-PKG_BUILD_DIR:=$(BUILD_DIR)/geoupdate-$(PKG_VERSION)
+PKG_BUILD_DIR:=$(BUILD_DIR)$(PKG_NAME)
 PKG_BUILD_DEPENDS:=golang/host
 PKG_BUILD_PARALLEL:=1
 PKG_BUILD_FLAGS:=no-mips16
 
 GO_PKG:=github.com/ytreu111/geoupdate
-GO_PKG_BUILD_PKG:=github.com/ytreu111/geoupdate/main
+GO_PKG_BUILD_PKG:=$(GO_PKG)/main
 
 include $(INCLUDE_DIR)/package.mk
 include $(TOPDIR)/feeds/packages/lang/golang/golang-package.mk
@@ -24,6 +23,11 @@ define Package/geoupdate
 	CATEGORY:=DarkCore
 	TITLE:=Geosite and Geoip updater
 	DEPENDS:=$(GO_ARCH_DEPENDS)
+endef
+
+define Build/Prepare
+	mkdir -p $(PKG_BUILD_DIR)
+	$(CP) ./src/* $(PKG_BUILD_DIR)/
 endef
 
 define Package/geoupdate/install
