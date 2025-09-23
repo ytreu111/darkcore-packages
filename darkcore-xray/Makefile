@@ -62,6 +62,9 @@ define Package/darkcore-xray/install
 	$(INSTALL_DATA) $(CURDIR)/files/configs/routing.json $(1)/etc/xray/
 	$(INSTALL_DIR) $(1)/etc/xray/
 	$(INSTALL_DATA) $(CURDIR)/files/configs/tail_outbounds.json $(1)/etc/xray/
+
+	$(INSTALL_DIR) $(1)/usr/share/xray/
+	$(INSTALL_DATA) $(CURDIR)/files/nftables.rulesv46 $(1)/usr/share/xray/
 endef
 
 $(eval $(call BuildPackage,darkcore-xray))

@@ -5,6 +5,13 @@ START=00
 
 CONF="xray"
 PROG="/usr/bin/xray"
+GATEWAY="192.168.2.1"
+
+wait_for_gateway() {
+    until ping -c1 $GATEWAY >/dev/null 2>&1; do
+        sleep 1
+    done
+}
 
 start_service() {
 	config_load "$CONF"
@@ -24,6 +31,11 @@ start_service() {
 	config_get datadir "config" "datadir" "/usr/share/xray"
 	config_get dialer "config" "dialer"
 	config_get format "config" "format" "json"
+
+  ip rule add fwmark 1 table 100
+  ip route add local 0.0.0.0/0 dev lo table 100
+  ip route add default via $GATEWAY
+  nft -f "${datadir}/nftables.rulesv46"
 
 	procd_open_instance "$CONF"
 	procd_set_param command "$PROG" run
@@ -46,6 +58,13 @@ start_service() {
 	procd_set_param respawn
 
 	procd_close_instance
+}
+
+stop_service() {
+    ip rule del fwmark 1 table 100
+    ip route del local 0.0.0.0/0 dev lo table 100
+    ip route del default via $GATEWAY
+    nft flush ruleset
 }
 
 reload_service() {
