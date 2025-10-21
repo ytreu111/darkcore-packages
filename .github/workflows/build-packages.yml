@@ -39,9 +39,7 @@ jobs:
       - name: Install feeds
         run: |
           cd openwrt-sdk
-          ll
           ./scripts/feeds update -a
-          ll
           ./scripts/feeds install -a
           make defconfig
 
