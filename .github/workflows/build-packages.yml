@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        pkg: [ geoupdate, darkcore-xray ]
+        pkg: [ geoupdate, darkcore-xray, darkcore-main ]
       fail-fast: false
 
     steps:
